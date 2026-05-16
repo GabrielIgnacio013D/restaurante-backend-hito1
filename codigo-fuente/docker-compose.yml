@@ -1,0 +1,59 @@
+services:
+  db-servicio:
+    image: mysql:8.0
+    container_name: mysql_servidor
+    environment:
+      MYSQL_ROOT_PASSWORD: clave_maestra_root
+      MYSQL_DATABASE: restaurante_db
+    ports:
+      - "3306:3306"
+    networks:
+      - red_restaurante
+
+  ms-reservas:
+    image: maven:3.9-eclipse-temurin-21
+    container_name: ms_reservas
+    ports: ["8081:8080"]
+    volumes: ["./ms-reservas:/app"]
+    working_dir: /app
+    command: tail -f /dev/null
+    networks: ["red_restaurante"]
+
+  ms-pedidos:
+    image: maven:3.9-eclipse-temurin-21
+    container_name: ms_pedidos
+    ports: ["8082:8080"]
+    volumes: ["./ms-pedidos:/app"]
+    working_dir: /app
+    command: tail -f /dev/null
+    networks: ["red_restaurante"]
+
+  ms-cocina:
+    image: maven:3.9-eclipse-temurin-21
+    container_name: ms_cocina
+    ports: ["8083:8080"]
+    volumes: ["./ms-cocina:/app"]
+    working_dir: /app
+    command: tail -f /dev/null
+    networks: ["red_restaurante"]
+
+  ms-pagos:
+    image: maven:3.9-eclipse-temurin-21
+    container_name: ms_pagos
+    ports: ["8084:8080"]
+    volumes: ["./ms-pagos:/app"]
+    working_dir: /app
+    command: tail -f /dev/null
+    networks: ["red_restaurante"]
+
+  ms-admin:
+    image: maven:3.9-eclipse-temurin-21
+    container_name: ms_admin
+    ports: ["8085:8080"]
+    volumes: ["./ms-admin:/app"]
+    working_dir: /app
+    command: tail -f /dev/null
+    networks: ["red_restaurante"]
+
+networks:
+  red_restaurante:

@@ -1,0 +1,10 @@
+.vscode-server/
+.vscode/
+.ssh/
+.cache/
+.dotnet/
+.gnupg/
+.m2/
+target/
+*.class
+*.jar
